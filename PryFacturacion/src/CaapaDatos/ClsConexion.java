@@ -38,4 +38,34 @@ public class ClsConexion {
     public ResultSet registros() {
         return _registros;
     }
+    
+    public boolean consulta(String tabla) throws SQLException{
+        boolean resp=false;
+        String cadena= "SELECT * FROM "+tabla;
+        _registros=null;
+        _tabla.execute(cadena);
+        _registros=_tabla.getResultSet();
+        if(_registros!=null){
+            resp=true;
+        }
+        return resp;
+    }
+        public void anterior()throws SQLException{
+            try{
+           if (!(_registros.previous())){
+               _registros.last();
+           }
+       }catch(SQLException err){
+             System.out.println("*** error recorrer ***" + err);
+        }
+    }
+    public void siguiente()throws SQLException{
+       try{
+           if (!(_registros.next())){
+               _registros.first();
+           }
+       }catch(SQLException err){
+             System.out.println("*** error recorrer ***" + err);
+        }        
+    }
 }
