@@ -41,7 +41,7 @@ public class ClsConexion {
     
     public boolean consulta(String tabla) throws SQLException{
         boolean resp=false;
-        String cadena= "SELECT * FROM "+tabla;
+        String cadena= "SELECT * FROM " + tabla;
         _registros=null;
         _tabla.execute(cadena);
         _registros=_tabla.getResultSet();
@@ -77,13 +77,13 @@ public class ClsConexion {
     }
       public void actualizarC(String tabla, String nom, String ape, String dir, String fecha, String telf,  String email, int clave) throws SQLException{
       
-        String comando = "UPDATE " + tabla + "SET"+"nombre='"+nom+"', apellido='"+ape+", direccion='"+dir+", fecha_nacimiento='"+fecha+"', telefono='"+telf+"', email='"+email+"'vWHERE Id Cliente='"+clave+"'";
+        String comando ="UPDATE " + tabla + " SET "+"nombre='"+nom+"', apellido='"+ape+"', direccion='"+dir+"', fecha_nacimiento='"+fecha+"', telefono='"+telf+"', email='"+email+"' WHERE Id_Cliente='"+clave+"'";
         
          _tabla.executeUpdate(comando);
         
         
     }public void eliminarC(String tabla, int clave) throws SQLException{
-        String cadena= "DELETE FROM "+tabla+" WHERE Id Cliente="+clave;
+        String cadena= "DELETE FROM "+tabla+" WHERE Id_Cliente="+clave;
         _tabla.executeUpdate(cadena);
     }    
 }

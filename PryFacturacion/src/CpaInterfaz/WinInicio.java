@@ -3,13 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package CpaInterfaz;
+
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import CaapaDatos.ClsConexion;
+
+
+
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,9 +28,18 @@ public class WinInicio extends javax.swing.JFrame {
 
     ClsConexion base, cliente, producto, vende;
     String BasedeDatos;
+    String nP,pP,uP,nC,aC,fC,dC,tC,cC,eC,nV,aV,dV,tV,cV,fFac,productoS;
+    int clvC;
     public WinInicio() {
         initComponents();
         ArchBd.setVisible(false);
+        PnlClientes.setVisible(false);
+        TxtNomC.setEnabled(false);
+        TxtApellC.setEnabled(false);
+        TxtFecNC.setEnabled(false);
+        TxtDirC.setEnabled(false);
+        TxtEmailC.setEnabled(false);
+        TxtTelC.setEnabled(false);
     }
 
     /**
@@ -33,6 +51,32 @@ public class WinInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PnlClientes = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        BtnAnteriorC = new javax.swing.JButton();
+        BtnSiguienteC = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        TxtEmailC = new javax.swing.JTextField();
+        TxtNomC = new javax.swing.JTextField();
+        TxtApellC = new javax.swing.JTextField();
+        TxtFecNC = new javax.swing.JTextField();
+        TxtDirC = new javax.swing.JTextField();
+        TxtTelC = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        BtnGuardarC = new javax.swing.JButton();
+        BtnGrabarC = new javax.swing.JButton();
+        BtnBorrarC = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        BtnEliminarC = new javax.swing.JButton();
+        BtnNuevoC = new javax.swing.JButton();
+        BtnConsultaC = new javax.swing.JButton();
+        BtnActuaC = new javax.swing.JButton();
         ArchBd = new javax.swing.JFileChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -40,16 +84,195 @@ public class WinInicio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PnlClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnAnteriorC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnAnteriorC.setText("Anterior");
+        BtnAnteriorC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAnteriorCActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnAnteriorC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 110, -1));
+
+        BtnSiguienteC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnSiguienteC.setText("Siguiente ");
+        BtnSiguienteC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSiguienteCActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnSiguienteC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 110, -1));
+
+        PnlClientes.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 330, 40));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("E-mail");
+        PnlClientes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 20));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setText("CLIENTE");
+        PnlClientes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 80, 30));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setText("Nombre:");
+        PnlClientes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, 20));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setText("Apellido:");
+        PnlClientes.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 70, 20));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setText("Fecha de nacimiento:");
+        PnlClientes.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 140, 20));
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setText("Direccion:");
+        PnlClientes.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 20));
+
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel11.setText("Telefono:");
+        PnlClientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 60, 20));
+
+        TxtEmailC.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtEmailC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtEmailCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtEmailC, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 170, 20));
+
+        TxtNomC.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtNomC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNomCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtNomC, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, 20));
+
+        TxtApellC.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtApellC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtApellCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtApellC, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 170, 20));
+
+        TxtFecNC.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtFecNC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFecNCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtFecNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 170, 20));
+
+        TxtDirC.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        TxtDirC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtDirCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtDirC, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 170, 20));
+
+        TxtTelC.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtTelC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtTelCActionPerformed(evt);
+            }
+        });
+        PnlClientes.add(TxtTelC, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 170, 20));
+
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnGuardarC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnGuardarC.setText("Guardar ");
+        BtnGuardarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarCActionPerformed(evt);
+            }
+        });
+        jPanel3.add(BtnGuardarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
+
+        BtnGrabarC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnGrabarC.setText("Modificar");
+        BtnGrabarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGrabarCActionPerformed(evt);
+            }
+        });
+        jPanel3.add(BtnGrabarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, -1));
+
+        BtnBorrarC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnBorrarC.setText("Borrar");
+        BtnBorrarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBorrarCActionPerformed(evt);
+            }
+        });
+        jPanel3.add(BtnBorrarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
+
+        PnlClientes.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 150, 100));
+
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnEliminarC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnEliminarC.setText("Eliminar");
+        BtnEliminarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarCActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnEliminarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 110, -1));
+
+        BtnNuevoC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnNuevoC.setText("Nuevo");
+        BtnNuevoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNuevoCActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnNuevoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
+
+        BtnConsultaC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnConsultaC.setText("Consultar");
+        BtnConsultaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultaCActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnConsultaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, -1));
+
+        BtnActuaC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnActuaC.setText("Actualizar");
+        BtnActuaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnActuaCActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnActuaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
+
+        PnlClientes.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 150, 140));
+
+        getContentPane().add(PnlClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 640, 350));
 
         ArchBd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ArchBdActionPerformed(evt);
             }
         });
+        getContentPane().add(ArchBd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 876, 419));
 
         jMenu1.setText("Base de datos");
 
@@ -75,6 +298,15 @@ public class WinInicio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Clientes");
+
+        jMenuItem3.setText("Consuultar y editar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Factura");
@@ -84,23 +316,6 @@ public class WinInicio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(ArchBd, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(ArchBd, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -120,6 +335,200 @@ public class WinInicio extends javax.swing.JFrame {
         ArchBd.setVisible(false);
         base=new ClsConexion(BasedeDatos);
     }//GEN-LAST:event_ArchBdActionPerformed
+
+    private void TxtEmailCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmailCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtEmailCActionPerformed
+
+    private void TxtNomCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNomCActionPerformed
+
+    private void TxtApellCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtApellCActionPerformed
+
+    private void TxtFecNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFecNCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtFecNCActionPerformed
+
+    private void TxtDirCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDirCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtDirCActionPerformed
+
+    private void TxtTelCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtTelCActionPerformed
+
+    private void BtnAnteriorCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnteriorCActionPerformed
+        try {
+            // TODO add your handling code here:
+            base.anterior();
+            TxtNomC.setText(base.registros().getString("nombre"));
+            TxtApellC.setText(base.registros().getString("apellido"));
+            TxtFecNC.setText(base.registros().getString("fecha_nacimiento"));
+            TxtDirC.setText(base.registros().getString("direccion"));
+            TxtTelC.setText(base.registros().getString("telefono"));
+            
+            TxtEmailC.setText(base.registros().getString("email"));    
+             clvC = base.registros().getInt("Id_Cliente");  
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnAnteriorCActionPerformed
+
+    private void BtnSiguienteCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSiguienteCActionPerformed
+         try {
+            // TODO add your handling code here:
+            base.siguiente();
+            TxtNomC.setText(base.registros().getString("nombre"));
+            TxtApellC.setText(base.registros().getString("apellido"));
+            TxtFecNC.setText(base.registros().getString("fecha_nacimiento"));
+            TxtDirC.setText(base.registros().getString("direccion"));
+            TxtTelC.setText(base.registros().getString("telefono"));
+            
+            TxtEmailC.setText(base.registros().getString("email"));  
+            clvC = base.registros().getInt("Id_Cliente");  
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+                  
+          
+             
+    }//GEN-LAST:event_BtnSiguienteCActionPerformed
+
+    private void BtnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarCActionPerformed
+       nC=TxtNomC.getText();
+        aC=TxtApellC.getText();
+        fC=TxtFecNC.getText();
+        dC=TxtDirC.getText();
+        tC=TxtTelC.getText();
+       
+        eC=TxtEmailC.getText();
+        try {
+            base.insertarC("CLIENTE", nC, aC, dC, fC,tC,eC);
+           
+            TxtNomC.setEnabled(false);
+            TxtApellC.setEnabled(false);
+            TxtFecNC.setEnabled(false);
+            TxtDirC.setEnabled(false);
+            TxtTelC.setEnabled(false);
+            
+            TxtEmailC.setEnabled(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+    }//GEN-LAST:event_BtnGuardarCActionPerformed
+
+    private void BtnGrabarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGrabarCActionPerformed
+        nC=TxtNomC.getText();
+        aC=TxtApellC.getText();
+        fC=TxtFecNC.getText();
+        dC=TxtDirC.getText();
+        tC=TxtTelC.getText();
+        
+        eC=TxtEmailC.getText();
+        
+        try {
+            base.actualizarC("CLIENTE ", nC, aC, dC, fC,tC,eC, clvC);
+            
+            TxtNomC.setEnabled(false);
+            TxtApellC.setEnabled(false);
+            TxtFecNC.setEnabled(false);
+            TxtDirC.setEnabled(false);
+            TxtTelC.setEnabled(false);
+            
+            TxtEmailC.setEnabled(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }//GEN-LAST:event_BtnGrabarCActionPerformed
+
+    private void BtnBorrarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarCActionPerformed
+         try {
+            base.eliminarC("CLIENTE", clvC);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+    }//GEN-LAST:event_BtnBorrarCActionPerformed
+
+    private void BtnEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarCActionPerformed
+        BtnGuardarC.setVisible(false);
+        BtnGrabarC.setVisible(false);
+        BtnBorrarC.setVisible(true);
+        BtnAnteriorC.setVisible(false);
+        BtnSiguienteC.setVisible(false);    
+       
+    }//GEN-LAST:event_BtnEliminarCActionPerformed
+
+    private void BtnNuevoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoCActionPerformed
+        BtnGuardarC.setVisible(true);
+        BtnGrabarC.setVisible(false);
+        BtnBorrarC.setVisible(false);
+        BtnAnteriorC.setVisible(false);
+        BtnSiguienteC.setVisible(false);     
+        TxtNomC.setEnabled(true);
+        TxtApellC.setEnabled(true);
+        TxtFecNC.setEnabled(true);
+        TxtDirC.setEnabled(true);
+        TxtTelC.setEnabled(true);
+        
+        TxtEmailC.setEnabled(true);
+        TxtNomC.setText(null);
+        TxtApellC.setText(null);
+        TxtFecNC.setText(null);
+        TxtDirC.setText(null);
+        TxtTelC.setText(null);
+        
+        TxtEmailC.setText(null);
+           
+    }//GEN-LAST:event_BtnNuevoCActionPerformed
+
+    private void BtnConsultaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultaCActionPerformed
+        BtnGuardarC.setVisible(false);
+        BtnGrabarC.setVisible(false);
+        BtnBorrarC.setVisible(false);
+        BtnAnteriorC.setVisible(true);
+        BtnSiguienteC.setVisible(true);  
+        
+    }//GEN-LAST:event_BtnConsultaCActionPerformed
+
+    private void BtnActuaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActuaCActionPerformed
+        BtnGuardarC.setVisible(false);
+        BtnGrabarC.setVisible(true);
+        BtnBorrarC.setVisible(false);
+        BtnAnteriorC.setVisible(false);
+        BtnSiguienteC.setVisible(false); 
+        TxtNomC.setEnabled(true);
+        TxtApellC.setEnabled(true);
+        TxtFecNC.setEnabled(true);
+        TxtDirC.setEnabled(true);
+        TxtTelC.setEnabled(true);
+        
+        TxtEmailC.setEnabled(true);
+        
+    }//GEN-LAST:event_BtnActuaCActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        BtnAnteriorC.setVisible(false);
+        BtnSiguienteC.setVisible(false);
+        BtnGuardarC.setVisible(false);
+        BtnGrabarC.setVisible(false);
+        BtnBorrarC.setVisible(false);
+        PnlClientes.setVisible(true);
+       /* PnlProductos.setVisible(false);
+        PnlVendedor.setVisible(false);
+        PnlDetF.setVisible(false);
+        PnlCreFac.setVisible(false);*/
+        try {
+            // TODO add your handling code here:
+            base.consulta("CLIENTE");
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +567,29 @@ public class WinInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser ArchBd;
+    private javax.swing.JButton BtnActuaC;
+    private javax.swing.JButton BtnAnteriorC;
+    private javax.swing.JButton BtnBorrarC;
+    private javax.swing.JButton BtnConsultaC;
+    private javax.swing.JButton BtnEliminarC;
+    private javax.swing.JButton BtnGrabarC;
+    private javax.swing.JButton BtnGuardarC;
+    private javax.swing.JButton BtnNuevoC;
+    private javax.swing.JButton BtnSiguienteC;
+    private javax.swing.JPanel PnlClientes;
+    private javax.swing.JTextField TxtApellC;
+    private javax.swing.JTextField TxtDirC;
+    private javax.swing.JTextField TxtEmailC;
+    private javax.swing.JTextField TxtFecNC;
+    private javax.swing.JTextField TxtNomC;
+    private javax.swing.JTextField TxtTelC;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -166,5 +598,9 @@ public class WinInicio extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }
