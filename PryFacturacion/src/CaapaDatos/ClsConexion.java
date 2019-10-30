@@ -68,4 +68,22 @@ public class ClsConexion {
              System.out.println("*** error recorrer ***" + err);
         }        
     }
+     public boolean insertarC(String tabla, String nom, String ape, String dir, String fecha, String telf, String email) throws SQLException{
+        String values = "'"+nom+"', '"+ape+"', '"+dir+"', '"+fecha+"', '"+telf+"', '"+email+"'";
+        String comando = "INSERT INTO " + tabla + "(nombre,apellido,direccion,fecha_nacimiento,telefono,email) VALUES("+values+")";
+        int rowCount = _tabla.executeUpdate(comando);
+       
+        return true;
+    }
+      public void actualizarC(String tabla, String nom, String ape, String dir, String fecha, String telf,  String email, int clave) throws SQLException{
+      
+        String comando = "UPDATE " + tabla + "SET"+"nombre='"+nom+"', apellido='"+ape+", direccion='"+dir+", fecha_nacimiento='"+fecha+"', telefono='"+telf+"', email='"+email+"'vWHERE Id Cliente='"+clave+"'";
+        
+         _tabla.executeUpdate(comando);
+        
+        
+    }public void eliminarC(String tabla, int clave) throws SQLException{
+        String cadena= "DELETE FROM "+tabla+" WHERE Id Cliente="+clave;
+        _tabla.executeUpdate(cadena);
+    }    
 }
