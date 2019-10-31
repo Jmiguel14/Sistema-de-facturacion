@@ -72,7 +72,7 @@ public class ClsConexion {
         String values = "'"+nom+"', '"+ape+"', '"+dir+"', '"+fecha+"', '"+telf+"', '"+email+"'";
         String comando = "INSERT INTO " + tabla + "(nombre,apellido,direccion,fecha_nacimiento,telefono,email) VALUES("+values+")";
         int rowCount = _tabla.executeUpdate(comando);
-       
+       this.consulta("CLIENTE");
         return true;
     }
       public void actualizarC(String tabla, String nom, String ape, String dir, String fecha, String telf,  String email, int clave) throws SQLException{
@@ -80,12 +80,13 @@ public class ClsConexion {
         String comando ="UPDATE " + tabla + " SET "+"nombre='"+nom+"', apellido='"+ape+"', direccion='"+dir+"', fecha_nacimiento='"+fecha+"', telefono='"+telf+"', email='"+email+"' WHERE Id_Cliente='"+clave+"'";
         
          _tabla.executeUpdate(comando);
-        
+        this.consulta("CLIENTE");
         
     }
       public void eliminarC(String tabla, int clave) throws SQLException{
         String cadena= "DELETE FROM "+tabla+" WHERE Id_Cliente="+clave;
         _tabla.executeUpdate(cadena);
+        this.consulta("CLIENTE");
     }  
     public boolean insertarP(String tabla, String nom, float precio, int stock ) throws SQLException{
         String values = "'"+nom+"', '"+precio+"', '"+stock+"'";
