@@ -18,7 +18,9 @@ import CaapaDatos.ClsConexion;
 
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,8 +30,9 @@ public class WinInicio extends javax.swing.JFrame {
 
     ClsConexion base, cliente, producto, vende;
     String BasedeDatos;
-    String nP,pP,uP,nC,aC,fC,dC,tC,cC,eC,nV,aV,dV,tV,cV,fFac,productoS;
-    int clvC;
+    String nP,nC,aC,fC,dC,tC,cC,eC,nV,aV,dV,tV,cV,fFac,productoS;
+    int clvC,clvP,sP;
+    float pP;
     public WinInicio() {
         initComponents();
         ArchBd.setVisible(false);
@@ -40,6 +43,7 @@ public class WinInicio extends javax.swing.JFrame {
         TxtDirC.setEnabled(false);
         TxtEmailC.setEnabled(false);
         TxtTelC.setEnabled(false);
+        this.PnlProductos.setLocation(null);
     }
 
     /**
@@ -51,6 +55,28 @@ public class WinInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PnlProductos = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        TxtStockProducto = new javax.swing.JTextField();
+        TxtNombreProducto = new javax.swing.JTextField();
+        TxtPrecioProducto = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        BtnEliminarProducto = new javax.swing.JButton();
+        BtnNuevoProducto = new javax.swing.JButton();
+        BtnConsultaProducto = new javax.swing.JButton();
+        BtnActuaProducto = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        BtnGuardarProducto = new javax.swing.JButton();
+        BtnGrabarProducto = new javax.swing.JButton();
+        BtnBorrarProducto = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        BtnAnteriorProducto = new javax.swing.JButton();
+        BtnSiguienteProducto = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaProductos = new javax.swing.JTable();
         PnlClientes = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         BtnAnteriorC = new javax.swing.JButton();
@@ -90,6 +116,166 @@ public class WinInicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PnlProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel1.setText("PRODUCTOS");
+        PnlProductos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("STOCK:");
+        PnlProductos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel12.setText("NOMBRE:");
+        PnlProductos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel13.setText("PRECIO:");
+        PnlProductos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+
+        TxtStockProducto.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        PnlProductos.add(TxtStockProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 180, -1));
+
+        TxtNombreProducto.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        TxtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNombreProductoActionPerformed(evt);
+            }
+        });
+        PnlProductos.add(TxtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 180, -1));
+
+        TxtPrecioProducto.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        PnlProductos.add(TxtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 180, -1));
+
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnEliminarProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnEliminarProducto.setText("Eliminar");
+        BtnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarProductoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(BtnEliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 110, -1));
+
+        BtnNuevoProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnNuevoProducto.setText("Nuevo");
+        BtnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNuevoProductoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(BtnNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
+
+        BtnConsultaProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnConsultaProducto.setText("Consultar");
+        BtnConsultaProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultaProductoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(BtnConsultaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, -1));
+
+        BtnActuaProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnActuaProducto.setText("Actualizar");
+        BtnActuaProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnActuaProductoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(BtnActuaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
+
+        PnlProductos.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 150, 140));
+
+        jPanel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnGuardarProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnGuardarProducto.setText("Guardar ");
+        BtnGuardarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarProductoActionPerformed(evt);
+            }
+        });
+        jPanel6.add(BtnGuardarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
+
+        BtnGrabarProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnGrabarProducto.setText("Modificar");
+        BtnGrabarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGrabarProductoActionPerformed(evt);
+            }
+        });
+        jPanel6.add(BtnGrabarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, -1));
+
+        BtnBorrarProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnBorrarProducto.setText("Borrar");
+        BtnBorrarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBorrarProductoActionPerformed(evt);
+            }
+        });
+        jPanel6.add(BtnBorrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
+
+        PnlProductos.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 150, 100));
+
+        jPanel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnAnteriorProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnAnteriorProducto.setText("Anterior");
+        BtnAnteriorProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAnteriorProductoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(BtnAnteriorProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 110, -1));
+
+        BtnSiguienteProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnSiguienteProducto.setText("Siguiente ");
+        BtnSiguienteProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSiguienteProductoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(BtnSiguienteProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 110, -1));
+
+        PnlProductos.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 330, 40));
+
+        TablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Precio", "Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TablaProductos);
+
+        PnlProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+
+        getContentPane().add(PnlProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 770, 460));
 
         PnlClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -295,6 +481,11 @@ public class WinInicio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Productos");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Clientes");
@@ -530,6 +721,165 @@ public class WinInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void TxtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNombreProductoActionPerformed
+
+    private void BtnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarProductoActionPerformed
+        BtnGuardarProducto.setVisible(false);
+        BtnGrabarProducto.setVisible(false);
+        BtnBorrarProducto.setVisible(true);
+        BtnAnteriorProducto.setVisible(false);
+        BtnSiguienteProducto.setVisible(false);
+    }//GEN-LAST:event_BtnEliminarProductoActionPerformed
+
+    private void BtnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoProductoActionPerformed
+        BtnGuardarProducto.setVisible(true);
+        BtnGrabarProducto.setVisible(false);
+        BtnBorrarProducto.setVisible(false);
+        BtnAnteriorProducto.setVisible(false);
+        BtnSiguienteProducto.setVisible(false);
+        TxtNombreProducto.setEnabled(true);
+        TxtPrecioProducto.setEnabled(true);
+        TxtStockProducto.setEnabled(true);
+        TxtNombreProducto.setText(null);
+        TxtPrecioProducto.setText(null);
+        TxtStockProducto.setText(null);
+    }//GEN-LAST:event_BtnNuevoProductoActionPerformed
+
+    private void BtnConsultaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultaProductoActionPerformed
+        BtnGuardarProducto.setVisible(false);
+        BtnGrabarProducto.setVisible(false);
+        BtnBorrarProducto.setVisible(false);
+        BtnAnteriorProducto.setVisible(true);
+        BtnSiguienteProducto.setVisible(true);
+    }//GEN-LAST:event_BtnConsultaProductoActionPerformed
+
+    private void BtnActuaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActuaProductoActionPerformed
+        BtnGuardarProducto.setVisible(false);
+        BtnGrabarProducto.setVisible(true);
+        BtnBorrarProducto.setVisible(false);
+        BtnAnteriorProducto.setVisible(false);
+        BtnSiguienteProducto.setVisible(false);
+        TxtNombreProducto.setEnabled(true);
+        TxtPrecioProducto.setEnabled(true);
+        TxtStockProducto.setEnabled(true);
+    }//GEN-LAST:event_BtnActuaProductoActionPerformed
+
+    private void BtnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarProductoActionPerformed
+        nP=TxtNombreProducto.getText();
+        pP=Float.parseFloat(TxtPrecioProducto.getText());
+        sP=Integer.parseInt(TxtStockProducto.getText());
+
+        try {
+            base.insertarP("PRODUCTO", nP, pP, sP);
+
+            TxtNombreProducto.setEnabled(false);
+            TxtPrecioProducto.setEnabled(false);
+            TxtStockProducto.setEnabled(false);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnGuardarProductoActionPerformed
+
+    private void BtnGrabarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGrabarProductoActionPerformed
+        nP=TxtNombreProducto.getText();
+        pP=Float.parseFloat(TxtPrecioProducto.getText());
+        sP=Integer.parseInt(TxtStockProducto.getText());
+
+        try {
+            base.actualizarP("PRODUCTO", nP, pP, sP, clvP);
+            TxtNomC.setEnabled(false);
+            TxtApellC.setEnabled(false);
+            TxtFecNC.setEnabled(false);
+            TxtDirC.setEnabled(false);
+            TxtTelC.setEnabled(false);
+            TxtEmailC.setEnabled(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_BtnGrabarProductoActionPerformed
+
+    private void BtnBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBorrarProductoActionPerformed
+        try {
+            base.eliminarP("PRODUCTO", clvP);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnBorrarProductoActionPerformed
+
+    private void BtnAnteriorProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnteriorProductoActionPerformed
+        try {
+            // TODO add your handling code here:
+            base.anterior();
+            base.siguiente();
+            TxtNombreProducto.setText(base.registros().getString("nombre"));
+
+            TxtPrecioProducto.setText(base.registros().getString("precio"));
+            TxtStockProducto.setText(base.registros().getString("stock"));
+            clvP = base.registros().getInt("Id_Producto");
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnAnteriorProductoActionPerformed
+
+    private void BtnSiguienteProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSiguienteProductoActionPerformed
+        try {
+            // TODO add your handling code here:
+            base.siguiente();
+            TxtNombreProducto.setText(base.registros().getString("nombre"));
+
+            TxtPrecioProducto.setText(base.registros().getString("precio"));
+            TxtStockProducto.setText(base.registros().getString("stock"));
+            clvP = base.registros().getInt("Id_Producto");
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnSiguienteProductoActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        TablaProductos.setVisible(true);
+        try{
+            DefaultTableModel model= new DefaultTableModel();
+            TablaProductos.setModel(model);
+            base.consulta1("TbProductos");
+            ResultSetMetaData rsmd =base.registros().getMetaData();
+            int columnas= rsmd.getColumnCount();
+            model.addColumn("Codigo");
+            model.addColumn("Nombre");
+            model.addColumn("Precio");
+            model.addColumn("Stock");
+            while(base.registros().next()){
+                Object [] filas= new Object[columnas];
+                for (int i=0;i<columnas;i++){
+                    filas[i]=base.registros().getObject(i+1);
+                }
+                model.addRow(filas);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        BtnAnteriorProducto.setVisible(false);
+        BtnSiguienteProducto.setVisible(false);
+        BtnGuardarProducto.setVisible(false);
+        BtnGrabarProducto.setVisible(false);
+        BtnBorrarProducto.setVisible(false);
+        PnlProductos.setVisible(true);
+       /* PnlProductos.setVisible(false);
+        PnlVendedor.setVisible(false);
+        PnlDetF.setVisible(false);
+        PnlCreFac.setVisible(false);*/
+        try {
+            // TODO add your handling code here:
+            base.consulta("CLIENTE");
+        } catch (SQLException ex) {
+            Logger.getLogger(WinInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -568,23 +918,41 @@ public class WinInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser ArchBd;
     private javax.swing.JButton BtnActuaC;
+    private javax.swing.JButton BtnActuaProducto;
     private javax.swing.JButton BtnAnteriorC;
+    private javax.swing.JButton BtnAnteriorProducto;
     private javax.swing.JButton BtnBorrarC;
+    private javax.swing.JButton BtnBorrarProducto;
     private javax.swing.JButton BtnConsultaC;
+    private javax.swing.JButton BtnConsultaProducto;
     private javax.swing.JButton BtnEliminarC;
+    private javax.swing.JButton BtnEliminarProducto;
     private javax.swing.JButton BtnGrabarC;
+    private javax.swing.JButton BtnGrabarProducto;
     private javax.swing.JButton BtnGuardarC;
+    private javax.swing.JButton BtnGuardarProducto;
     private javax.swing.JButton BtnNuevoC;
+    private javax.swing.JButton BtnNuevoProducto;
     private javax.swing.JButton BtnSiguienteC;
+    private javax.swing.JButton BtnSiguienteProducto;
     private javax.swing.JPanel PnlClientes;
+    private javax.swing.JPanel PnlProductos;
+    private javax.swing.JTable TablaProductos;
     private javax.swing.JTextField TxtApellC;
     private javax.swing.JTextField TxtDirC;
     private javax.swing.JTextField TxtEmailC;
     private javax.swing.JTextField TxtFecNC;
     private javax.swing.JTextField TxtNomC;
+    private javax.swing.JTextField TxtNombreProducto;
+    private javax.swing.JTextField TxtPrecioProducto;
+    private javax.swing.JTextField TxtStockProducto;
     private javax.swing.JTextField TxtTelC;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -602,5 +970,9 @@ public class WinInicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

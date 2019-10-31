@@ -107,6 +107,13 @@ public class ClsConexion {
         String cadena= "DELETE FROM "+tabla+" WHERE Id_producto="+clave;
         _tabla.executeUpdate(cadena);
     } 
+      public void consulta1(String Tabla) throws SQLException{
+        String Cadena="SELECT * FROM"+Tabla;
+        _tabla.execute(Cadena);
+        _registros=_tabla.getResultSet();
+        
+        
+    }
      
     
 }
