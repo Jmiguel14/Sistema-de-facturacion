@@ -82,8 +82,30 @@ public class ClsConexion {
          _tabla.executeUpdate(comando);
         
         
-    }public void eliminarC(String tabla, int clave) throws SQLException{
+    }
+      public void eliminarC(String tabla, int clave) throws SQLException{
         String cadena= "DELETE FROM "+tabla+" WHERE Id_Cliente="+clave;
         _tabla.executeUpdate(cadena);
-    }    
+    }  
+    public boolean insertarP(String tabla, String nom, float precio, int stock ) throws SQLException{
+        String values = "'"+nom+"', '"+precio+"', '"+stock+"'";
+        String comando = "INSERT INTO " + tabla + "(nombre,precio,stock) VALUES("+values+")";
+        int rowCount = _tabla.executeUpdate(comando);
+       
+        return true;
+    }
+      public void actualizarP(String tabla, String nom, float precio,int stock, int clave) throws SQLException{
+      
+        String comando ="UPDATE " + tabla + " SET "+"nombre='"+nom+"', precio='"+precio+"', stock='"+stock+"' WHERE Id_producto='"+clave+"'";
+        
+         _tabla.executeUpdate(comando);
+        
+        
+    }
+      public void eliminarP(String tabla, int clave) throws SQLException{
+        String cadena= "DELETE FROM "+tabla+" WHERE Id_producto="+clave;
+        _tabla.executeUpdate(cadena);
+    } 
+     
+    
 }
